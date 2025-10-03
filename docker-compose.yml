@@ -1,0 +1,21 @@
+services:
+  hugin:
+    build: .
+    container_name: hugin
+    env_file:
+      - .env.dev.hugin
+    ports:
+      - "3000:3000"
+#    depends_on:
+#      - couchdb
+    networks:
+      - default
+    volumes:
+      - ./:/app
+      - /app/node_modules
+    restart: unless-stopped
+
+networks:
+  default:
+    name: development
+    external: true
