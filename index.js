@@ -1,4 +1,3 @@
-require('dotenv').config({ path: '.env.dev.hugin' });
 const express = require('express');
 const session = require('express-session');
 const helmet = require('helmet');
