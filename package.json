@@ -14,7 +14,6 @@
   "dependencies": {
     "express": "^4.18.2",
     "express-session": "^1.17.3",
-    "openid-client": "^5.6.1",
     "nano": "^10.1.2",
     "axios": "^1.6.2",
     "cheerio": "^1.0.0-rc.12",
@@ -22,7 +21,9 @@
     "cors": "^2.8.5",
     "helmet": "^7.1.0",
     "express-rate-limit": "^7.1.5",
-    "puppeteer": "^21.6.1"
+    "puppeteer": "^21.6.1",
+    "uuid": "^9.0.1",
+    "robots-parser": "^3.0.1"
   },
   "devDependencies": {
     "nodemon": "^3.0.2",

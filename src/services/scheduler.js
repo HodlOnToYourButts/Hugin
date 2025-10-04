@@ -1,3 +1,4 @@
+const { v4: uuidv4 } = require('uuid');
 const { getDatabase } = require('../db/couchdb');
 const { crawlUrl } = require('./crawler');
 
@@ -53,7 +54,7 @@ async function runScheduledCrawls() {
 
     // Recrawl each root URL
     for (const rootUrl of rootUrls) {
-      const crawlId = `scheduled_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
+      const crawlId = uuidv4();
       const maxDepth = parseInt(process.env.CRAWLER_MAX_DEPTH) || 3;
 
       console.log(`Scheduled recrawl: ${rootUrl}`);

@@ -47,6 +47,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // Routes
 app.use('/auth', authRoutes);
+app.use('/', authRoutes); // Also mount auth routes at root for /callback
 app.use('/api/crawler', crawlerRoutes);
 app.use('/api/search', searchRoutes);
 

@@ -1,4 +1,5 @@
 const express = require('express');
+const { v4: uuidv4 } = require('uuid');
 const { requireAuth } = require('../middleware/auth');
 const { crawlUrl } = require('../services/crawler');
 const { getDatabase } = require('../db/couchdb');
@@ -22,13 +23,13 @@ router.post('/submit', requireAuth, async (req, res) => {
     }
 
     // Start crawling in background
-    const crawlId = Date.now().toString();
+    const crawlId = uuidv4();
     const crawlDepth = maxDepth || parseInt(process.env.CRAWLER_MAX_DEPTH) || 3;
 
     // Store crawl job
     const db = getDatabase();
     await db.insert({
-      _id: `crawl_${crawlId}`,
+      _id: `crawl:${crawlId}`,
       type: 'crawl_job',
       url,
       maxDepth: crawlDepth,
@@ -58,7 +59,7 @@ router.post('/submit', requireAuth, async (req, res) => {
 router.get('/status/:crawlId', requireAuth, async (req, res) => {
   try {
     const db = getDatabase();
-    const doc = await db.get(`crawl_${req.params.crawlId}`);
+    const doc = await db.get(`crawl:${req.params.crawlId}`);
     res.json(doc);
   } catch (error) {
     if (error.statusCode === 404) {
