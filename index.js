@@ -25,7 +25,13 @@ app.use(cors());
 // Rate limiting
 const limiter = rateLimit({
   windowMs: 15 * 60 * 1000, // 15 minutes
-  max: 100 // limit each IP to 100 requests per windowMs
+  max: 100, // limit each IP to 100 requests per windowMs
+  standardHeaders: true,
+  legacyHeaders: false,
+  validate: {
+    trustProxy: false, // Disable validation when behind Traefik
+    xForwardedForHeader: false
+  }
 });
 app.use(limiter);
 
