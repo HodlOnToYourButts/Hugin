@@ -15,6 +15,9 @@ const { startScheduler } = require('./src/services/scheduler');
 const app = express();
 const PORT = process.env.PORT || 3000;
 
+// Trust proxy - needed when behind reverse proxy (nginx, traefik, etc.)
+app.set('trust proxy', true);
+
 // Security middleware
 app.use(helmet());
 app.use(cors());
