@@ -19,7 +19,11 @@ const PORT = process.env.PORT || 3000;
 app.set('trust proxy', true);
 
 // Security middleware
-app.use(helmet());
+app.use(helmet({
+  contentSecurityPolicy: false,
+  crossOriginEmbedderPolicy: false,
+  hsts: false
+}));
 app.use(cors());
 
 // Rate limiting
