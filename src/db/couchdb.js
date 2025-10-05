@@ -4,11 +4,11 @@ const nano = require('nano');
 let couchdbUrl = process.env.COUCHDB_URL;
 const dbName = process.env.COUCHDB_DATABASE || 'hugin';
 
-// Add credentials to URL if in development mode
-if (process.env.DEVELOPMENT_MODE === 'true') {
-  const username = process.env.COUCHDB_USER || 'hugin';
-  const password = process.env.COUCHDB_PASSWORD || 'hugin';
+// Add credentials to URL
+const username = process.env.COUCHDB_USER;
+const password = process.env.COUCHDB_PASSWORD;
 
+if (username && password) {
   // Parse the URL and inject credentials
   const urlObj = new URL(couchdbUrl);
   urlObj.username = username;
